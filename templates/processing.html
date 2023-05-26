@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Processing</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Check the task status every 2 seconds
+      var checkStatus = setInterval(function() {
+        $.get('/task_status', function(data) {
+          if (data.status === 'SUCCESS') {
+            clearInterval(checkStatus);
+            window.location.href = '/success';  // Redirect to success page
+          } else if (data.status === 'FAILURE') {
+            clearInterval(checkStatus);
+            alert('Video processing failed. Please try again.');
+            window.location.href = '/upload';  // Redirect to upload page
+          }
+        });
+      }, 2000);
+    });
+  </script>
+</head>
+<body>
+  <h1>Processing...</h1>
+  <h2>Processed Video URL:</h2>
+  <p><a href="{{ processed_video_url }}">{{ processed_video_url }}</a></p>
+  <!-- The URL itself is displayed as a hyperlink using the processed_video_url context variable. Users can click on the hyperlink to access the processed video. -->
+</body>
+</html>

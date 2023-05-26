@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search Results</title>
+</head>
+<body>
+  <h1>Search Results</h1>
+
+  <ul>
+    {% for i in instances %}
+      <li>Video: {{ i.video_name }}, Time segment: {{ i.start_time }} - {{ i.end_time }}</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
